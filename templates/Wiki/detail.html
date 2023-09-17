@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}{{ page.title }}{% endblock title %}
+{% block content %}
+<h1>{{ page.title }}</h1>
+  <a href="{% url 'Wiki:update' username slug %}" class="btn btn-primary btn-sm">編集</a>
+  <div class="markdownx">
+    {{ page.get_text_markdownx | safe }}
+  </div>
+{% endblock content %}

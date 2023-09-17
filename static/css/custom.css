@@ -1,0 +1,16 @@
+.custom-container {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* テーブル*/
+.markdownx table {
+    border-collapse: collapse;
+}
+
+/* テーブル*/
+.markdownx th,td {
+    border: solid 2px;
+}

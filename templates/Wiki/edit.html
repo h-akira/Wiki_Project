@@ -1,0 +1,27 @@
+{# {% load markdownx %} #}
+{% extends 'base.html' %}
+{% block title %}編集{% endblock title %}
+{% block content %}
+{% if type == "create" %}
+<h1>新規作成</h1>
+<form class="" action="{% url 'Wiki:create' %}" method="post">
+{% elif type == "update" %}
+<h1>編集</h1>
+<form class="" action="{% url 'Wiki:update' username slug %}" method="post">
+{% else %}
+<h1>新規作成</h1>
+<form class="" action="{% url 'Wiki:create' %}" method="post">
+  {% endif %}
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if type == "create" %}
+  <button type="submit" class="btn btn-primary btn-sm">作成</button>
+  {% elif type == "update" %}
+  <button type="submit" class="btn btn-primary btn-sm">更新</button>
+  <a href="{% url 'Wiki:delete' id %}" class="btn btn-primary btn-sm">削除</a>
+  {% else %}
+  <button type="submit" class="btn btn-primary btn-sm">作成</button>
+  {% endif %}
+</form>
+{{ form.media }}
+{% endblock content %}
