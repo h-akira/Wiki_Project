@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Index{% endblock title %}
+{% block content %}
+<h1>ツリー</h1>
+  {# <a href="{% url 'Wiki:update' username slug %}" class="btn btn-primary btn-sm">編集</a> #}
+{# <ul class="construction"> #}
+<ul class="tree">
+  <li>第一階層（経営層）
+    <ul>
+      <li>第二階層（部門）
+        <ul>
+          <li>第三階層（チーム）</li>
+          <li>第三階層（チーム）</li>
+          <li>第三階層（チーム）</li>
+        </ul>
+      </li>
+      <li>第二階層（部門）
+        <ul>
+          <li>第三階層（チーム）</li>
+          <li>第三階層（チーム）</li>
+          <li>第三階層（チーム）</li>
+        </ul>
+      </li>
+      <li>第二階層（部門）
+        <ul>
+          <li>第三階層（チーム）</li>
+          <li>第三階層（チーム）</li>
+          <li>第三階層（チーム）</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+Copy code
+{# <div class="hierarchy"> #}
+<div class="tree">
+    <ul>
+        <li>
+            Root
+            <ul>
+                <li>
+                    Child 1
+                    <ul>
+                        <li>Grandchild 1-1</li>
+                        <li>Grandchild 1-2</li>
+                    </ul>
+                </li>
+                <li>
+                    Child 2
+                    <ul>
+                        <li>Grandchild 2-1</li>
+                        <li>Grandchild 2-2</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+{% endblock content %}
