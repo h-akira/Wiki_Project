@@ -35,27 +35,27 @@
 Copy code
 {# <div class="hierarchy"> #}
 <div class="tree">
-    <ul>
+  <ul>
+    <li>
+      Root
+      <ul>
         <li>
-            Root
-            <ul>
-                <li>
-                    Child 1
-                    <ul>
-                        <li>Grandchild 1-1</li>
-                        <li>Grandchild 1-2</li>
-                    </ul>
-                </li>
-                <li>
-                    Child 2
-                    <ul>
-                        <li>Grandchild 2-1</li>
-                        <li>Grandchild 2-2</li>
-                    </ul>
-                </li>
-            </ul>
+          Child 1
+          <ul>
+            <li>Grandchild 1-1</li>
+            <li>Grandchild 1-2</li>
+          </ul>
         </li>
-    </ul>
+        <li>
+          Child 2
+          <ul>
+            <li>Grandchild 2-1</li>
+            <li>Grandchild 2-2</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
 </div>
 
 {% endblock content %}
