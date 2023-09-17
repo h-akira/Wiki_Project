@@ -5,12 +5,56 @@
   margin-right: 10px;
 }
 
-/* テーブル*/
 .markdownx table {
     border-collapse: collapse;
 }
 
-/* テーブル*/
 .markdownx th,td {
     border: solid 2px;
+}
+
+/* 参考 */
+/* https://chibashi.me/development/html-css/css-treestructure/ */
+.tree ul {
+  list-style-type: none;
+  margin: 0 0 0 15px;
+  padding: 0;
+  position: relative;
+}
+.tree ul li {
+  position: relative;
+  margin: 0;
+  padding: 7px 20px;
+}
+.tree ul li:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 18px;
+  left: 0;
+  width: 13px;
+  height: 0;
+  border-top: 1px solid #666;
+}
+.tree ul li:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  border-left: 1px solid #666;
+}
+.tree ul li:last-child:after {
+  height: 18px;
+}
+
+.tree > ul > li:before,
+.tree > ul > li:after {
+  border: none;
+}
+.tree i {
+  margin-right: 8px;
 }

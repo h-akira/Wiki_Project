@@ -5,23 +5,31 @@
 {% if type == "create" %}
 <h1>新規作成</h1>
 <form class="" action="{% url 'Wiki:create' %}" method="post">
+  <button type="submit" class="btn btn-primary btn-sm">作成</button>
 {% elif type == "update" %}
 <h1>編集</h1>
 <form class="" action="{% url 'Wiki:update' username slug %}" method="post">
+  <button type="submit" class="btn btn-primary btn-sm">更新</button>
+  <a href="{% url 'Wiki:detail' username slug %}" class="btn btn-primary btn-sm">戻る</a>
+  <a href="{% url 'Wiki:delete' id %}" class="btn btn-danger btn-sm">削除</a>
 {% else %}
 <h1>新規作成</h1>
 <form class="" action="{% url 'Wiki:create' %}" method="post">
-  {% endif %}
+  <button type="submit" class="btn btn-primary btn-sm">作成</button>
+{% endif %}
   {% csrf_token %}
-  {{ form.as_p }}
-  {% if type == "create" %}
-  <button type="submit" class="btn btn-primary btn-sm">作成</button>
-  {% elif type == "update" %}
-  <button type="submit" class="btn btn-primary btn-sm">更新</button>
-  <a href="{% url 'Wiki:delete' id %}" class="btn btn-primary btn-sm">削除</a>
-  {% else %}
-  <button type="submit" class="btn btn-primary btn-sm">作成</button>
-  {% endif %}
+  {# {{ form.as_p }} #}
+  <p>
+    Path
+    {{ form.slug }}
+  </p>
+  <p>
+    Title
+    {{ form.title }}
+  </p>
+  <p>
+  {{ form.text }}
+  </p>
 </form>
 {{ form.media }}
 {% endblock content %}
