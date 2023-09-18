@@ -1,2 +1,3 @@
 from .tree import Tree
-__all__ = ["Tree"]
+from . import wiki
+__all__ = ["Tree","wiki"]

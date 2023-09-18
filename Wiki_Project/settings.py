@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.forms',
     'Wiki.apps.WikiConfig',
+    'accounts.apps.AccountsConfig',
     'markdownx'
 ]
 
@@ -134,3 +135,7 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
 ]
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+
+LGIN_URL = "account:login"
+LOGIN_REDIRECT_URL = "Wiki:index"
+LOGOUT_REDIRECT_URL = "Wiki:index"  

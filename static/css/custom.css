@@ -1,3 +1,9 @@
+.a-white {
+  color: white;
+  text-decoration: underline;
+  text-decoration-color: white;
+}
+
 .custom-container {
   padding-left: 10px;
   padding-right: 10px;

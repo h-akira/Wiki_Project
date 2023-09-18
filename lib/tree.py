@@ -29,20 +29,23 @@ class Tree:
     for _name, _data, _end in zip(next_names, next_datas, next_ends):
       self.nexts.append(Tree(_name, _data, upper_slug=self.slug, top=False, end=_end))
 
-  def gen_html(self, username, prettify=True, top=True):
+  def gen_html(self, username, prettify=True, top=True, a_class=None):
     text = ""
     if top:
       text += "<ul>"
     text += "<li>"
     if self.end:
       url = reverse('Wiki:detail', args=[username, self.slug])
-      text += f'<a href="{url}"> {self.name} </a>'
+      if a_class == None:
+        text += f'<a href="{url}"> {self.name} </a>'
+      else:
+        text += f'<a href="{url}" class="{a_class}"> {self.name} </a>'
     else:
       text += self.name
     if len(self.nexts):
       text += "<ul>"
       for next_tree in self.nexts:
-        text += next_tree.gen_html(username, prettify=False, top=False)
+        text += next_tree.gen_html(username, prettify=False, top=False, a_class=a_class)
       text += "</ul>"
     text += "</li>"
     if top:
@@ -52,28 +55,3 @@ class Tree:
       text = soup.prettify()
     return text
 
-# def gen_html(username, item, prettify=False, top=False):
-#   text = ""
-#   if top:
-#     text += "<ul>"
-#   text += "<li>"
-#   if item.end:
-#     url = reverse('Wiki:detail', args=[username, item.slug])
-#     text += f'<a href="{url}"> {item.name} </a>'
-#   else:
-#     text += item.name
-#   if len(item.nexts):
-#     text += "<ul>"
-#     for next_item in item.nexts:
-#       text += gen_html(username, next_item)
-#     text += "</ul>"
-#   text += "</li>"
-#   if top:
-#     text += "</ul>"
-#   if prettify:
-#     soup = BeautifulSoup(text, "html.parser")
-#     text = soup.prettify()
-#   return text
-#
-#
-#
