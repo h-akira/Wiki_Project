@@ -1,0 +1,6 @@
+beautifulsoup4==4.12.2
+bs4==0.0.1
+Django==4.2.5
+django-boost==2.1
+django-markdownx==4.0.2
+Markdown==3.3.6
