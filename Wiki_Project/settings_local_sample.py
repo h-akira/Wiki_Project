@@ -27,3 +27,6 @@ DATABASES = {
   }
 }
 
+# サインアップの可否
+SIGNUP = True
+
