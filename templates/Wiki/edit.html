@@ -18,19 +18,16 @@
   <button type="submit" class="btn btn-primary btn-sm">作成</button>
 {% endif %}
   {% csrf_token %}
+  <hr>
   {# {{ form.as_p }} #}
+  <p>パス：</p>
+  <p>{{ form.slug }}</p>
   <p>
-    Path
-    {{ form.slug }}
-  </p>
-  <p>
-    Public
+    公開：
     {{ form.public }}
   </p>
-  <p>
-    Title
-    {{ form.title }}
-  </p>
+  <p>タイトル：</p>
+  <p>{{ form.title }}</p>
   <p>
   {{ form.text }}
   </p>

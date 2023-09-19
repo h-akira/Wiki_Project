@@ -27,10 +27,15 @@ def detail(request, username, slug):
   page = PageTable.objects.get(user=user, slug=slug)
   if not page.public and page.user != request.user:
     return redirect("Wiki:index")
+  if page.user == request.user:
+    edit = True
+  else:
+    edit = False
   context = {
     "page": page,
     "username": username,
     "slug": slug,
+    "edit": edit,
     "nav_tree_htmls":lib.wiki.gen_tree_htmls(request, User, PageTable, a_white=True)
   }
   return render(request, 'Wiki/detail.html', context)

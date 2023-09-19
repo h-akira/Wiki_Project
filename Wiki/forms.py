@@ -7,7 +7,21 @@ class PageForm(forms.ModelForm):
     model = PageTable
     fields = ("slug", "public", "title", "text")
     widgets = {
-      'text': MarkdownxWidget(attrs={'rows': 25, 'style': 'width: 100%; overflow-y: hidden;'}),
+      'text': MarkdownxWidget(
+        attrs={
+          'rows': 25, 'style': 'width: 100%; overflow-y: hidden;'
+        }
+      ),
+      'title': forms.TextInput(
+        attrs={
+          'style': 'width: 100%; height: auto; font-size: 1.5rem;'
+        }
+      ),
+      'slug': forms.TextInput(
+        attrs={
+          'style': 'width: 100%;'
+        }
+      ),
       # 'text': MarkdownxWidget(attrs={'rows': 25, 'style': 'width: 100%;'}),
     }
 
