@@ -112,12 +112,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
 MARKDOWNX_MARKDOWN_EXTENSIONS = [
   'markdown.extensions.extra',  # テーブル，コードブロック等
+  'markdown.extensions.codehilite',  # コードハイライト
   'markdown.extensions.toc',  # 目次
   'markdown.extensions.nl2br',  # 改行
 ]
+# 追加する場合は以下のページから選択する．
+# https://python-markdown.github.io/extensions/
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
-LGIN_URL = "account:login"
+LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "Wiki:index"
 LOGOUT_REDIRECT_URL = "Wiki:index"  
