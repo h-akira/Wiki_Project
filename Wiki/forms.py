@@ -9,7 +9,7 @@ class PageForm(forms.ModelForm):
     widgets = {
       'text': MarkdownxWidget(
         attrs={
-          'style': 'width: 100%; hidden; height: 100%; overflow-y: hidden;',
+          'class': 'dynamic-textarea'
         }
       ),
       'title': forms.TextInput(
@@ -22,7 +22,6 @@ class PageForm(forms.ModelForm):
           'style': 'width: 100%;'
         }
       ),
-      # 'text': MarkdownxWidget(attrs={'rows': 25, 'style': 'width: 100%;'}),
     }
 
 

@@ -19,6 +19,13 @@
     border: solid 2px;
 }
 
+.dynamic-textarea {
+  width: 100%;
+  min-height: 80%;
+  overflow-y: hidden;
+  resize: none;
+}
+
 /* 参考 */
 /* https://chibashi.me/development/html-css/css-treestructure/ */
 .tree ul {
