@@ -9,8 +9,7 @@ class PageForm(forms.ModelForm):
     widgets = {
       'text': MarkdownxWidget(
         attrs={
-          'rows': 25, 
-          'style': 'width: 100%; overflow-y: hidden;',
+          'style': 'width: 100%; hidden; height: 100%; overflow-y: hidden;',
         }
       ),
       'title': forms.TextInput(
