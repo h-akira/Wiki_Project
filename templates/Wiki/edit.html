@@ -13,7 +13,8 @@
   <button type="submit" name="action" value="detail" class="btn btn-primary btn-sm">保存して終了</button>
   <button type="submit" name="action" value="update" class="btn btn-primary btn-sm">保存して継続</button>
   <a href="{% url 'Wiki:detail' username slug %}" class="btn btn-primary btn-sm">戻る</a>
-  <a href="{% url 'Wiki:delete' id %}" class="btn btn-danger btn-sm">削除</a>
+  <a class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#delete">削除</a>
+  {% include 'Wiki/delete_modal.html' %}
 {% else %}
 <h1>新規作成</h1>
 <form class="" action="{% url 'Wiki:create' %}" method="post">
