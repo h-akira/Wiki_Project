@@ -11,7 +11,6 @@ class PageForm(forms.ModelForm):
         attrs={
           'rows': 25, 
           'style': 'width: 100%; overflow-y: hidden;',
-          'class': 'custom-textarea',
         }
       ),
       'title': forms.TextInput(
