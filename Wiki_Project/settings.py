@@ -115,6 +115,7 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
   'markdown.extensions.codehilite',  # コードハイライト
   'markdown.extensions.toc',  # 目次
   'markdown.extensions.nl2br',  # 改行
+	'markdown.extensions.sane_lists',  # 箇条関係
 ]
 # 追加する場合は以下のページから選択する．
 # https://python-markdown.github.io/extensions/
