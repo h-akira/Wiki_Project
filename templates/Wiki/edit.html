@@ -5,11 +5,13 @@
 {% if type == "create" %}
 <h1>新規作成</h1>
 <form class="" action="{% url 'Wiki:create' %}" method="post">
-  <button type="submit" class="btn btn-primary btn-sm">作成</button>
+  <button type="submit" name="action" value="detail" class="btn btn-primary btn-sm">保存して終了</button>
+  <button type="submit" name="action" value="update" class="btn btn-primary btn-sm">保存して継続</button>
 {% elif type == "update" %}
 <h1>編集</h1>
 <form class="" action="{% url 'Wiki:update' username slug %}" method="post">
-  <button type="submit" class="btn btn-primary btn-sm">更新</button>
+  <button type="submit" name="action" value="detail" class="btn btn-primary btn-sm">保存して終了</button>
+  <button type="submit" name="action" value="update" class="btn btn-primary btn-sm">保存して継続</button>
   <a href="{% url 'Wiki:detail' username slug %}" class="btn btn-primary btn-sm">戻る</a>
   <a href="{% url 'Wiki:delete' id %}" class="btn btn-danger btn-sm">削除</a>
 {% else %}

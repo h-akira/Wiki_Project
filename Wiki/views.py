@@ -48,7 +48,12 @@ def create(request):
       instance = form.save(commit=False)  # まだDBには保存しない
       instance.user = request.user  # userをセット
       instance.save()  # DBに保存
-    return redirect("Wiki:detail",instance.user.username,instance.slug)
+      if request.POST['action'] == 'update':
+        return redirect("Wiki:update",instance.user.username,instance.slug)
+      elif request.POST['action'] == 'detail':
+        return redirect("Wiki:detail",instance.user.username,instance.slug)
+      else:
+        raise Exception
   else:
     form = PageForm()
     context = {
@@ -57,7 +62,7 @@ def create(request):
       "nav_tree_htmls":lib.wiki.gen_tree_htmls(request, User, PageTable, a_white=True)
     }
     return render(request, 'Wiki/edit.html', context)
-    
+
 def update(request, username, slug):
   user = User.objects.get(username=username)
   # page = PageTable.objects.get(user=user, slug=slug)
@@ -66,7 +71,12 @@ def update(request, username, slug):
     form = PageForm(request.POST, instance=page)
     if form.is_valid():
       form.save()
-    return redirect("Wiki:detail",username,form.instance.slug)
+    if request.POST['action'] == 'update':
+      return redirect("Wiki:update",username,slug)
+    elif request.POST['action'] == 'detail':
+      return redirect("Wiki:detail",username,slug)
+    else:
+      raise Exception
   else:
     if page.user != request.user:
       return redirect("Wiki:index")

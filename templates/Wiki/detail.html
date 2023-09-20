@@ -4,10 +4,15 @@
 <div class="card">
   <div class="card-body text-bg-secondary">
     <h1>{{ page.title }}</h1>
+    <p>
+      (最終更新:{{ page.last_updated }})
+    </p>
     {% if edit %}
-    <a href="{% url 'Wiki:update' username slug %}" class="btn btn-success btn-sm">
-      編集
-    </a>
+    <p>
+      <a href="{% url 'Wiki:update' username slug %}" class="btn btn-light btn-sm">
+        編集
+      </a>
+    </p>
     {% endif %}
   </div>
 </div>
