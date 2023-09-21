@@ -27,3 +27,14 @@ function autoResizeTextArea(textArea) {
     // textareaのheight属性を設定
     textArea.style.height = height;
 }
+
+// // ウィンドウサイズ変更時のイベントハンドラ
+// window.addEventListener("resize", function() {
+//     // classがdynamic-textareaであるtextareaを取得
+//     const textareas = document.querySelectorAll('.dynamic-textarea');
+//
+//     // textareaの縦の大きさを調整
+//     textareas.forEach(textarea => {
+//         autoResizeTextArea(textarea);
+//     });
+// });
