@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // textareaの縦の大きさを調整
   textareas.forEach(textarea => {
     autoResizeTextArea(textarea);
+    console.log("textarea")
   });
 });
 
@@ -16,6 +17,7 @@ document.addEventListener('input', function(event) {
   if (event.target.tagName.toLowerCase() === 'textarea' && event.target.classList.contains('dynamic-textarea')) {
     // textareaの縦の大きさを調整
     autoResizeTextArea(event.target);
+    console.log("textarea")
   }
 });
 
