@@ -2,12 +2,12 @@
 {% extends 'base.html' %}
 {% block title %}編集{% endblock title %}
 {% block content %}
-{% if type == "create" %}
+{% if type == "create" or type != "update" %}
 <h1>新規作成</h1>
 <form class="" action="{% url 'Wiki:create' %}" method="post">
   <button type="submit" name="action" value="detail" class="btn btn-primary btn-sm">保存して終了</button>
   <button type="submit" name="action" value="update" class="btn btn-primary btn-sm">保存して継続</button>
-{% elif type == "update" %}
+{% else %}
 <h1>編集</h1>
 <form class="" action="{% url 'Wiki:update' username slug %}" method="post">
   <button type="submit" name="action" value="detail" class="btn btn-primary btn-sm">保存して終了</button>
@@ -15,14 +15,9 @@
   <a href="{% url 'Wiki:detail' username slug %}" class="btn btn-primary btn-sm">戻る</a>
   <a class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#delete">削除</a>
   {% include 'Wiki/delete_modal.html' %}
-{% else %}
-<h1>新規作成</h1>
-<form class="" action="{% url 'Wiki:create' %}" method="post">
-  <button type="submit" class="btn btn-primary btn-sm">作成</button>
 {% endif %}
   {% csrf_token %}
   <hr>
-  {# {{ form.as_p }} #}
   <p>パス：</p>
   <p>{{ form.slug }}</p>
   <p>
@@ -34,6 +29,14 @@
   <p>
   {{ form.text }}
   </p>
+  {{ form.media }}
+  <hr>
+  <button type="submit" name="action" value="detail" class="btn btn-primary btn-sm">保存して終了</button>
+  <button type="submit" name="action" value="update" class="btn btn-primary btn-sm">保存して継続</button>
+  {%if type == "update" %}
+  <a href="{% url 'Wiki:detail' username slug %}" class="btn btn-primary btn-sm">戻る</a>
+  <a class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#delete">削除</a>
+  {% include 'Wiki/delete_modal.html' %}
+  {% endif %}
 </form>
-{{ form.media }}
 {% endblock content %}
