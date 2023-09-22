@@ -71,12 +71,12 @@ def update(request, username, slug):
     form = PageForm(request.POST, instance=page)
     if form.is_valid():
       form.save()
-    if request.POST['action'] == 'update':
-      return redirect("Wiki:update",username,slug)
-    elif request.POST['action'] == 'detail':
-      return redirect("Wiki:detail",username,slug)
-    else:
-      raise Exception
+      if request.POST['action'] == 'update':
+        return redirect("Wiki:update",username,form.instance.slug)
+      elif request.POST['action'] == 'detail':
+        return redirect("Wiki:detail",username,form.instance.slug)
+      else:
+        raise Exception
   else:
     if page.user != request.user:
       return redirect("Wiki:index")
