@@ -16,7 +16,5 @@
     {% endif %}
   </div>
 </div>
-  <div class="markdownx">
-    {{ page.get_text_markdownx | safe }}
-  </div>
+{{ page.get_text_markdownx | safe }}
 {% endblock content %}

@@ -4,12 +4,12 @@
   text-decoration-color: white;
 }
 
-.custom-container {
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
+/* .custom-container { */
+/*   padding-left: 10px; */
+/*   padding-right: 10px; */
+/*   margin-left: 10px; */
+/*   margin-right: 10px; */
+/* } */
 
 .markdownx table {
     border-collapse: collapse;
@@ -17,13 +17,6 @@
 
 .markdownx th,td {
     border: solid 2px;
-}
-
-.dynamic-textarea {
-  width: 100%;
-  min-height: 100%;
-  overflow-y: hidden;
-  resize: none;
 }
 
 /* 参考 */
