@@ -9,6 +9,7 @@ class PageTable(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   last_updated = models.DateTimeField(auto_now=True)
   slug = models.CharField(max_length=127)
+  priority = models.FloatField(default=0)
   title = models.CharField(max_length=127)
   public = models.BooleanField(default=True)
   text = MarkdownxField(null=True, blank=True)

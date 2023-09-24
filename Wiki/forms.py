@@ -5,7 +5,7 @@ from markdownx.widgets import MarkdownxWidget
 class PageForm(forms.ModelForm):
   class Meta:
     model = PageTable
-    fields = ("slug", "public", "title", "text")
+    fields = ("slug", "priority", "public", "title", "text")
     widgets = {
       'text': MarkdownxWidget(
         attrs={
@@ -19,7 +19,7 @@ class PageForm(forms.ModelForm):
       ),
       'slug': forms.TextInput(
         attrs={
-          'style': 'width: 100%;'
+          'style': 'width: 500px;'
         }
       ),
     }

@@ -14,6 +14,7 @@ def gen_tree_htmls(request, User, PageTable, a_white=True):
         pages = PageTable.objects.filter(user=user, public=True)
     else:
       pages = PageTable.objects.filter(user=user, public=True)
+    pages = pages.order_by('-priority')
     data = []
     for page in pages:
       data.append(page.slug.split("/"))

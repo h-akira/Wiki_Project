@@ -2,41 +2,49 @@
 {% extends 'base.html' %}
 {% block title %}編集{% endblock title %}
 {% block content %}
-{% if type == "create" or type != "update" %}
-<h1>新規作成</h1>
-<form class="" action="{% url 'Wiki:create' %}" method="post">
-  <button type="submit" name="action" value="detail" class="btn btn-primary btn-sm">保存して終了</button>
-  <button type="submit" name="action" value="update" class="btn btn-primary btn-sm">保存して継続</button>
-{% else %}
-<h1>編集</h1>
-<form class="" action="{% url 'Wiki:update' username slug %}" method="post">
-  <button type="submit" name="action" value="detail" class="btn btn-primary btn-sm">保存して終了</button>
-  <button type="submit" name="action" value="update" class="btn btn-primary btn-sm">保存して継続</button>
-  <a href="{% url 'Wiki:detail' username slug %}" class="btn btn-primary btn-sm">戻る</a>
-  <a class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#delete">削除</a>
-  {% include 'Wiki/delete_modal.html' %}
-{% endif %}
-  {% csrf_token %}
-  <hr>
-  <p>パス：</p>
-  <p>{{ form.slug }}</p>
-  <p>
-    公開：
-    {{ form.public }}
-  </p>
-  <p>タイトル：</p>
-  <p>{{ form.title }}</p>
-  <p>
-  {{ form.text }}
-  </p>
-  {{ form.media }}
-  <hr>
-  <button type="submit" name="action" value="detail" class="btn btn-primary btn-sm">保存して終了</button>
-  <button type="submit" name="action" value="update" class="btn btn-primary btn-sm">保存して継続</button>
+<div class="padding-side">
+  {% if type == "create" or type != "update" %}
+  <h1>新規作成</h1>
+  <form class="" action="{% url 'Wiki:create' %}" method="post">
+    <button type="submit" name="action" value="detail" class="btn btn-primary btn-sm">保存して終了</button>
+    <button type="submit" name="action" value="update" class="btn btn-primary btn-sm">保存して継続</button>
+  {% else %}
+  <h1>編集</h1>
+  <form class="" action="{% url 'Wiki:update' username slug %}" method="post">
+    <button type="submit" name="action" value="detail" class="btn btn-primary btn-sm">保存して終了</button>
+    <button type="submit" name="action" value="update" class="btn btn-primary btn-sm">保存して継続</button>
+    <a href="{% url 'Wiki:detail' username slug %}" class="btn btn-primary btn-sm">戻る</a>
+    <a class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#delete">削除</a>
+  {% endif %}
+    {% csrf_token %}
+    <hr>
+    <pre>パス&#009;：{{ form.slug }}</pre>
+    <pre>優先度&#009;：{{ form.priority }}</pre>
+    <pre>公開&#009;：{{ form.public }}</pre>
+    <pre>タイトル&#009;：</pre>
+    <p>{{ form.title }}</p>
+    <p>
+      {{ form.text }}
+    </p>
+    {{ form.media }}
+    <hr>
+    <button type="submit" name="action" value="detail" class="btn btn-primary btn-sm">
+      保存して終了
+    </button>
+    <button type="submit" name="action" value="update" class="btn btn-primary btn-sm">
+      保存して継続
+    </button>
+    {%if type == "update" %}
+    <a href="{% url 'Wiki:detail' username slug %}" class="btn btn-primary btn-sm">
+      戻る
+    </a>
+    <a class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#delete">
+      削除
+    </a>
+    {% endif %}
+  </form>
   {%if type == "update" %}
-  <a href="{% url 'Wiki:detail' username slug %}" class="btn btn-primary btn-sm">戻る</a>
-  <a class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#delete">削除</a>
   {% include 'Wiki/delete_modal.html' %}
   {% endif %}
-</form>
+</div>
 {% endblock content %}
