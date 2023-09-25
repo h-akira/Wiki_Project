@@ -1,6 +1,11 @@
 const a = document.getElementById("id_public");
 const b = document.getElementById("id_edit_permission");
 const editPermission = document.getElementById("edit-permission");
+// ページ読み込み時に実行
+document.addEventListener('DOMContentLoaded', function() {
+  // Aのチェック状態に応じてeditPermissionの表示を設定
+  toggleB();
+});
 // Aがチェックされているかどうかをチェックする
 function isAChecked() {
   return a.checked;
