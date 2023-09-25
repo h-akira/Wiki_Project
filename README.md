@@ -1,36 +1,34 @@
-# 概要
-Wikiの機能を有するWebアプリである．
-マークダウンによる入力と各ページのスラッグ（URLの末尾）を指定できることが特徴．
-フレームワークにはDjangoを用いている．
+# Overview
+This is a web application with **wiki** functions. 
+It features markdown input and the ability to specify the slug (end of URL) for each page.
+Django is used as framework.
 
-# 起動
-ローカルで起動する場合の一例を示す．
-LinuxまたはMacでPythonの環境構築が済んでいる（pipを含む）ことを前提とする．
+# Launching
+The following is an example of local startup. 
+It is assumed that a Python environment (including pip) has already been built on Linux or Mac.
 ```
-# 任意の階層で
+# In any hierarchy
 git clone https://github.com/h-akira/Wiki_Project.git
 cd Wiki_Project
 pip3 install -r requirements.txt
 ```
-ここで，設定ファイル`settings.py`のうち`SECRET_KEY`など個別に設定すべきところは
-`settings_local.py`から`import`する仕様になっているので，それを用意する．
-`Wiki_Project/settings_local_sample.py`をコピーして編集すればよいが，
-`bin/add_secret_key.py`を用いれば`SECRET_KEY`の生成も含めて自動で行なうことができる．
-シンボリックリンクが階層`Wiki_Project/Wiki_Project`に貼ってあるので，
+In the `settings.py`, Read `settings_local.py` by `import` to set SECRET_KEY and other individual settings. 
+You can copy and edit `Wiki_Project/settings_local_sample.py`, 
+but you can automatically generate `SECRET_KEY` by using `bin/add_secret_key.py`. 
+Because Symbolic links are placed in the hierarchy `Wiki_Project/Wiki_Project`, 
+Plese execute it. 
 ```
+cd Wiki_Project
 ./add_secret_key.py
 ```
-で良い．
-その後，
+After that, go to the hierarchy where `manage.py` is located and do database migrations.
 ```
-# manage.pyのある階層に移動して
+cd ..
 python3 manage.py makemigrations
 python3 manage.py migrate
 ```
-で準備が完了し，
+This completes the preparation, and you can run the server.
 ```
 python3 manage.py runserver
 ```
-で起動する．
-
 
