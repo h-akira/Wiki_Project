@@ -27,7 +27,7 @@ def detail(request, username, slug):
   page = PageTable.objects.get(user=user, slug=slug)
   if not page.public and page.user != request.user:
     return redirect("Wiki:index")
-  if page.user == request.user or page.edit_permission:
+  if page.user == request.user or (request.user.is_authenticated and page.edit_permission):
     edit = True
   else:
     edit = False
@@ -63,6 +63,7 @@ def create(request):
     }
     return render(request, 'Wiki/edit.html', context)
 
+@login_required
 def update(request, username, slug):
   user = User.objects.get(username=username)
   # page = PageTable.objects.get(user=user, slug=slug)
