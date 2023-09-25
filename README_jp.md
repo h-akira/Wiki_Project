@@ -18,6 +18,7 @@ pip3 install -r requirements.txt
 `bin/add_secret_key.py`を用いれば`SECRET_KEY`の生成も含めて自動で行なうことができる．
 シンボリックリンクが階層`Wiki_Project/Wiki_Project`に貼ってあるので，
 ```
+cd Wiki_Project
 ./add_secret_key.py
 ```
 で良い．
