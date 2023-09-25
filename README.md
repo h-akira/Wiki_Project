@@ -12,7 +12,7 @@ git clone https://github.com/h-akira/Wiki_Project.git
 cd Wiki_Project
 pip3 install -r requirements.txt
 ```
-In the `settings.py`, Read `settings_local.py` by `import` to set SECRET_KEY and other individual settings. 
+In the `settings.py`, Read `settings_local.py` by `import` to set `SECRET_KEY` and other individual settings. 
 You can copy and edit `Wiki_Project/settings_local_sample.py`, 
 but you can automatically generate `SECRET_KEY` by using `bin/add_secret_key.py`. 
 Because Symbolic links are placed in the hierarchy `Wiki_Project/Wiki_Project`, 
