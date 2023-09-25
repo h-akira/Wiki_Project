@@ -3,7 +3,7 @@ This is a web application with **wiki** functions.
 It features markdown input and the ability to specify the slug (end of URL) for each page.
 Django is used as framework.
 
-# Launching
+# Settings
 The following is an example of local startup. 
 It is assumed that a Python environment (including pip) has already been built on Linux or Mac.
 ```
