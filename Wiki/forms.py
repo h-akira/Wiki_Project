@@ -5,7 +5,7 @@ from markdownx.widgets import MarkdownxWidget
 class PageForm(forms.ModelForm):
   class Meta:
     model = PageTable
-    fields = ("slug", "priority", "public", "title", "text")
+    fields = ("slug", "priority", "public", "edit_permission", "title", "text")
     widgets = {
       'text': MarkdownxWidget(
         attrs={

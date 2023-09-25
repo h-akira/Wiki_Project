@@ -27,7 +27,7 @@ def detail(request, username, slug):
   page = PageTable.objects.get(user=user, slug=slug)
   if not page.public and page.user != request.user:
     return redirect("Wiki:index")
-  if page.user == request.user:
+  if page.user == request.user or page.edit_permission:
     edit = True
   else:
     edit = False
@@ -67,33 +67,39 @@ def update(request, username, slug):
   user = User.objects.get(username=username)
   # page = PageTable.objects.get(user=user, slug=slug)
   page = get_object_or_404(PageTable, user=user, slug=slug)
-  if request.method == 'POST':
-    form = PageForm(request.POST, instance=page)
-    if form.is_valid():
-      form.save()
-      if request.POST['action'] == 'update':
-        return redirect("Wiki:update",username,form.instance.slug)
-      elif request.POST['action'] == 'detail':
-        return redirect("Wiki:detail",username,form.instance.slug)
+  if page.user == request.user or page.edit_permission:
+    if request.method == 'POST':
+      form = PageForm(request.POST, instance=page)
+      if form.is_valid():
+        form.save()
+        if request.POST['action'] == 'update':
+          return redirect("Wiki:update",username,form.instance.slug)
+        elif request.POST['action'] == 'detail':
+          return redirect("Wiki:detail",username,form.instance.slug)
+        else:
+          raise Exception
+    else:
+      if page.user == request.user:
+        author = True
       else:
-        raise Exception
+        author = False
+      form = PageForm(instance=page)
+      context = {
+        "id": page.id,
+        "username": username,
+        "slug": slug,
+        "form": form,
+        "type": "update",
+        "author": author,
+        "nav_tree_htmls":lib.wiki.gen_tree_htmls(request, User, PageTable, a_white=True)
+      }
+      return render(request, 'Wiki/edit.html', context)
   else:
-    if page.user != request.user:
-      return redirect("Wiki:index")
-    form = PageForm(instance=page)
-    context = {
-      "id": page.id,
-      "username": username,
-      "slug": slug,
-      "form": form,
-      "type": "update",
-      "nav_tree_htmls":lib.wiki.gen_tree_htmls(request, User, PageTable, a_white=True)
-    }
-    return render(request, 'Wiki/edit.html', context)
+    return redirect("Wiki:index")
 
 @login_required
 def delete(request, id):
   page = get_object_or_404(PageTable, pk=id)
-  if request.user == page.user:
+  if request.user == page.user or page.edit_permission:
     page.delete()
   return redirect("Wiki:index")

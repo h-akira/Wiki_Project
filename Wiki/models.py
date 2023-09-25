@@ -4,7 +4,6 @@ from django.utils.safestring import mark_safe
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 
-
 class PageTable(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
   last_updated = models.DateTimeField(auto_now=True)
@@ -12,6 +11,7 @@ class PageTable(models.Model):
   priority = models.FloatField(default=0)
   title = models.CharField(max_length=127)
   public = models.BooleanField(default=True)
+  edit_permission = models.BooleanField(default=False)
   text = MarkdownxField(null=True, blank=True)
   def get_text_markdownx(self):
     return mark_safe(markdownify(self.text))

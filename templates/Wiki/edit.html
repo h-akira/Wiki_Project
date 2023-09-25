@@ -1,6 +1,12 @@
-{# {% load markdownx %} #}
 {% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet"href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/styles/default.min.css">
+{% endblock extra_css %}
+
 {% block title %}編集{% endblock title %}
+
 {% block content %}
 <div class="padding-side">
   {% if type == "create" or type != "update" %}
@@ -18,11 +24,20 @@
   {% endif %}
     {% csrf_token %}
     <hr>
-    <pre>パス&#009;：{{ form.slug }}</pre>
-    <pre>優先度&#009;：{{ form.priority }}</pre>
-    <pre>公開&#009;：{{ form.public }}</pre>
     <pre>タイトル&#009;：</pre>
     <p>{{ form.title }}</p>
+    <pre>スラッグ&#009;：{{ form.slug }}</pre>
+    <pre>優先度&#009;：{{ form.priority }}</pre>
+    {% if author %}
+    <pre>公開&#009;：{{ form.public }}</pre>
+    <pre id="edit-permission">編集許可&#009;：{{ form.edit_permission }}</pre>
+    {% else %}
+    <div hidden="hidden">
+      <pre>公開&#009;：{{ form.public }}</pre>
+      <pre id="edit-permission">編集許可&#009;：{{ form.edit_permission }}</pre>
+    </div>
+    {% endif %}
+    <hr>
     <p>
       {{ form.text }}
     </p>
@@ -48,3 +63,12 @@
   {% endif %}
 </div>
 {% endblock content %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="{% static 'js/textarea.js' %}"></script>
+{% if author %}
+<script src="{% static 'js/edit_permission.js' %}"></script>
+{% endif %}
+{% endblock extra_js %}
