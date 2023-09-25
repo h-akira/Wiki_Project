@@ -1,0 +1,1 @@
+../bin/add_secret_key.py
