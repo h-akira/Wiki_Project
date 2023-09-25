@@ -5,6 +5,7 @@ Wikiの機能を有するWebアプリである．
 
 # 起動
 ローカルで起動する場合の一例を示す．
+LinuxまたはMacでPythonの環境構築が済んでいる（pipを含む）ことを前提とする．
 ```
 # 任意の階層で
 git clone https://github.com/h-akira/Wiki_Project.git
