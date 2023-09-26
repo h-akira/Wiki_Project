@@ -22,6 +22,9 @@
     <p>
       <a href="{% url 'Wiki:update' username slug %}" class="btn btn-light btn-sm">
         編集
+        {% if not page.edit_permission %}
+        <i class="bi bi-lock"></i>
+        {% endif %}
       </a>
     </p>
     {% endif %}
