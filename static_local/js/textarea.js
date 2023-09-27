@@ -5,10 +5,7 @@
 // ページ読み込み時に実行
 document.addEventListener('DOMContentLoaded', function() {
   // classがdynamic-textareaであるtextareaを取得
-  //
-  
   const textareas = document.querySelectorAll('.dynamic-textarea');
-
   // textareaの縦の大きさを調整
   textareas.forEach(textarea => {
     autoResizeTextArea(textarea);
@@ -28,47 +25,8 @@ function autoResizeTextArea(textArea) {
   // 以下を参照
   // https://kodocode.net/design-js-textarea/
   const scrollHeight = textArea.scrollHeight;
-  const right = document.querySelector('.markdownx-preview');
-  const rightHeight = right.offsetHeight;
-  const adjustHeight = document.querySelector('.adjust-height');
-  // const adjustHeightHeight = rightdiv.offsetHeight;
-  // console.log("preview and div")
-  // console.log(rightHeight)
-  // console.log(rightdivHeight)
+  const temporary = document.querySelector('.temporary-height');
+  temporary.style.cssText = 'height : ' + scrollHeight + 'px;';
   textArea.style.cssText = 'height : auto;';
-  textArea.style.cssText = 'height : ' + textArea.scrollHeight + 'px;';
-  if (rightHeight > 0 && scrollHeight >= rightHeight ) {
-    // console.log('adjust')
-    // console.log(scrollHeight)
-    // console.log(rightHeight)
-    right.style.height = scrollHeight-1 + 'px';
-    // adjustHeight.style.height = scrollHeight-1 + 'px';
-    // right.style.height = rightHeight + 'px';
-  // } else {
-    // adjustHeight.style.height = rightHeight+10 + 'px';
-  }
-  // if (rightHeight > rightdivHeight){
-  //   console.log("adjust2")
-  //   rightdiv.style.height = rightHeight + 'px';
-  // }
+  textArea.style.cssText = 'height : ' + scrollHeight + 'px;';
 }
-
-// function autoResizeTextArea(textArea) {
-//   // 以下を参照
-//   // https://kodocode.net/design-js-textarea/
-//   textArea.style.cssText = 'height : auto;';
-//   textArea.style.cssText = 'height : ' + scrollHeight + 'px;';
-//   // 右側の要素の高さを取得
-//   const scrollHeight = textArea.scrollHeight;
-//   const right = document.querySelector('.markdownx-preview');
-//   const rightHeight = right.offsetHeight;
-//   console.log(rightHeight)
-//   console.log(scrollHeight)
-//
-//   // right.style.height = 'auto';
-//   // テキストエリアの高さが右側の高さより高くなったら
-//   if (scrollHeight > rightHeight ) {
-//     // テキストエリアの高さを右側の高さに制限する
-//     right.style.height = scrollHeight +3 + 'px';
-//   }
-// }
