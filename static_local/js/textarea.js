@@ -5,6 +5,8 @@
 // ページ読み込み時に実行
 document.addEventListener('DOMContentLoaded', function() {
   // classがdynamic-textareaであるtextareaを取得
+  //
+  
   const textareas = document.querySelectorAll('.dynamic-textarea');
 
   // textareaの縦の大きさを調整
@@ -25,19 +27,30 @@ document.addEventListener('input', function(event) {
 function autoResizeTextArea(textArea) {
   // 以下を参照
   // https://kodocode.net/design-js-textarea/
-  console.log(textArea.scrollHeight)
-  textArea.style.cssText = 'height : auto;';
-  textArea.style.cssText = 'height : ' + textArea.scrollHeight + 'px;';
   const scrollHeight = textArea.scrollHeight;
   const right = document.querySelector('.markdownx-preview');
   const rightHeight = right.offsetHeight;
-  console.log(rightHeight)
-  console.log(scrollHeight)
-  // テキストエリアの高さが右側の高さより高くなったら
-  if (scrollHeight >= rightHeight ) {
-    // 右側の高さをテキストエリアの高さまで伸ばす
+  const adjustHeight = document.querySelector('.adjust-height');
+  // const adjustHeightHeight = rightdiv.offsetHeight;
+  // console.log("preview and div")
+  // console.log(rightHeight)
+  // console.log(rightdivHeight)
+  textArea.style.cssText = 'height : auto;';
+  textArea.style.cssText = 'height : ' + textArea.scrollHeight + 'px;';
+  if (rightHeight > 0 && scrollHeight >= rightHeight ) {
+    // console.log('adjust')
+    // console.log(scrollHeight)
+    // console.log(rightHeight)
     right.style.height = scrollHeight-1 + 'px';
-  } 
+    // adjustHeight.style.height = scrollHeight-1 + 'px';
+    // right.style.height = rightHeight + 'px';
+  // } else {
+    // adjustHeight.style.height = rightHeight+10 + 'px';
+  }
+  // if (rightHeight > rightdivHeight){
+  //   console.log("adjust2")
+  //   rightdiv.style.height = rightHeight + 'px';
+  // }
 }
 
 // function autoResizeTextArea(textArea) {
