@@ -25,6 +25,37 @@ document.addEventListener('input', function(event) {
 function autoResizeTextArea(textArea) {
   // 以下を参照
   // https://kodocode.net/design-js-textarea/
+  console.log(textArea.scrollHeight)
   textArea.style.cssText = 'height : auto;';
   textArea.style.cssText = 'height : ' + textArea.scrollHeight + 'px;';
+  const scrollHeight = textArea.scrollHeight;
+  const right = document.querySelector('.markdownx-preview');
+  const rightHeight = right.offsetHeight;
+  console.log(rightHeight)
+  console.log(scrollHeight)
+  // テキストエリアの高さが右側の高さより高くなったら
+  if (scrollHeight >= rightHeight ) {
+    // 右側の高さをテキストエリアの高さまで伸ばす
+    right.style.height = scrollHeight-1 + 'px';
+  } 
 }
+
+// function autoResizeTextArea(textArea) {
+//   // 以下を参照
+//   // https://kodocode.net/design-js-textarea/
+//   textArea.style.cssText = 'height : auto;';
+//   textArea.style.cssText = 'height : ' + scrollHeight + 'px;';
+//   // 右側の要素の高さを取得
+//   const scrollHeight = textArea.scrollHeight;
+//   const right = document.querySelector('.markdownx-preview');
+//   const rightHeight = right.offsetHeight;
+//   console.log(rightHeight)
+//   console.log(scrollHeight)
+//
+//   // right.style.height = 'auto';
+//   // テキストエリアの高さが右側の高さより高くなったら
+//   if (scrollHeight > rightHeight ) {
+//     // テキストエリアの高さを右側の高さに制限する
+//     right.style.height = scrollHeight +3 + 'px';
+//   }
+// }
