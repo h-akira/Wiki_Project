@@ -29,7 +29,8 @@ INSTALLED_APPS = [
   'django.forms',
   'Wiki.apps.WikiConfig',
   'accounts.apps.AccountsConfig',
-  'markdownx'
+  'markdownx',
+  'mdeditor',
 ]
 
 MIDDLEWARE = [
@@ -100,6 +101,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static_local"),]
 if not DEBUG:
   STATIC_ROOT = os.path.join(BASE_DIR,'static') 
+# STATIC_ORDER = (
+  # 'django.contrib.staticfiles',
+  # 'mdeditor',
+# )
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -110,7 +115,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
-MARKDOWNX_MARKDOWN_EXTENSIONS = [
+MARKDOWN_EXTENSIONS = [
   'markdown.extensions.extra',  # テーブル，コードブロック等
   'markdown.extensions.codehilite',  # コードハイライト
   'markdown.extensions.toc',  # 目次
@@ -125,3 +130,15 @@ FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "Wiki:index"
 LOGOUT_REDIRECT_URL = "Wiki:index"  
+
+MDEDITOR_CONFIGS = {
+    'default': {
+        'language': 'en',
+        'toolbar': ["undo", "redo", "image", "|",
+                    "bold", "quote", "|",
+                    "h1", "h2", "h3", "h5", "h6", "|",
+                    "list-ul", "list-ol", "hr", "|",
+                    "||", "preview", "watch", "fullscreen"],
+        'lineWrapping': True
+    }
+}

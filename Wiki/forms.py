@@ -7,11 +7,11 @@ class PageForm(forms.ModelForm):
     model = PageTable
     fields = ("slug", "priority", "public", "edit_permission", "title", "text")
     widgets = {
-      'text': MarkdownxWidget(
-        attrs={
-          'class': 'dynamic-textarea'
-        }
-      ),
+      # 'text': MarkdownxWidget(
+        # attrs={
+          # 'class': 'dynamic-textarea'
+        # }
+      # ),
       'title': forms.TextInput(
         attrs={
           'style': 'width: 100%; height: auto; font-size: 1.5rem;'

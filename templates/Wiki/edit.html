@@ -3,6 +3,7 @@
 
 {% block extra_css %}
 <link rel="stylesheet"href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/styles/default.min.css">
+<link rel="stylesheet" href="{% static 'css/menu.css' %}">
 {% endblock extra_css %}
 
 {% block title %}編集{% endblock title %}
@@ -23,7 +24,6 @@
     <a class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#delete">削除</a>
   {% endif %}
     {% csrf_token %}
-    <hr>
     <pre>タイトル&#009;：</pre>
     <p>{{ form.title }}</p>
     <pre>スラッグ&#009;：{{ form.slug }}</pre>
@@ -39,9 +39,10 @@
     {% endif %}
     <hr>
     <p>
+      {{ form.media }}
       {{ form.text }}
     </p>
-    {{ form.media }}
+    {# {{ form.media }} #}
     <hr>
     <button type="submit" name="action" value="detail" class="btn btn-primary btn-sm">
       保存して終了
@@ -65,10 +66,11 @@
 {% endblock content %}
 
 {% block extra_js %}
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-<script src="{% static 'js/textarea.js' %}"></script>
+{# <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/highlight.min.js"></script> #}
+{# <script>hljs.initHighlightingOnLoad();</script> #}
+{# <script src="{% static 'js/textarea.js' %}"></script> #}
 {% if author %}
 <script src="{% static 'js/edit_permission.js' %}"></script>
 {% endif %}
+<script src="{% static 'js/menu.js' %}"></script>
 {% endblock extra_js %}

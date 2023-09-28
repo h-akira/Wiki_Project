@@ -1,5 +1,30 @@
-.padding-top {
-  padding-top: 55px;
+/* pre { */
+  /* background-color: white; */
+/* } */
+.ul-test ul {
+    list-style-type: disc; /* 黒い点を設定 */
+    padding-left: 1em;     /* リストの左側のスペースを追加 */
+}
+
+.ul-test ul ul {
+    list-style-type: circle; /* 2階層目は白抜きの点に */
+}
+
+.ul-test ul ul ul {
+    list-style-type: square; /* 3階層目は四角に */
+}
+
+/* ul { */
+/*   list-style-type: none; */
+/* } */
+/*  */
+/* li { */
+/*   margin-bottom: 1rem; */
+/*   font-family: 'Font Awesome 5 Free'; */
+/* } */
+
+.padding-top-56 {
+  padding-top: 56px;
 }
 
 /* .padding-top-seccond { */
