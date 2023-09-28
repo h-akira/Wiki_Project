@@ -1,17 +1,35 @@
-<div class="modal" id="delete" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">確認</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>このページを削除しますか？</p>
-      </div>
-      <div class="modal-footer">
-        <a href="{% url 'Wiki:delete' id %}" class="btn btn-primary">はい</a>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button>
-      </div>
-    </div>
+<!-- <div class="modal" id="delete" tabindex="-1"> -->
+<!--   <div class="modal-dialog"> -->
+<!--     <div class="modal-content"> -->
+<!--       <div class="modal-header"> -->
+<!--         <h5 class="modal-title">確認</h5> -->
+<!--         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+<!--       </div> -->
+<!--       <div class="modal-body"> -->
+<!--         <p>このページを削除しますか？</p> -->
+<!--       </div> -->
+<!--       <div class="modal-footer"> -->
+<!--         <a href="{% url 'Wiki:delete' id %}" class="btn btn-primary">はい</a> -->
+<!--         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">いいえ</button> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </div> -->
+<!-- </div> -->
+<!--  -->
+<div class="modal" id="delete">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Modal title</p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <!-- Content ... -->
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success">Save changes</button>
+      <button class="button">Cancel</button>
+    </footer>
   </div>
 </div>
+
