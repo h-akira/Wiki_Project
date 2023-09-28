@@ -29,7 +29,7 @@ INSTALLED_APPS = [
   'django.forms',
   'Wiki.apps.WikiConfig',
   'accounts.apps.AccountsConfig',
-  'markdownx',
+  # 'markdownx',
   'mdeditor',
 ]
 

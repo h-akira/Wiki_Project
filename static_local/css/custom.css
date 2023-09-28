@@ -1,16 +1,17 @@
-/* pre { */
-  /* background-color: white; */
-/* } */
-.ul-test ul {
+.card-bordered {
+  border: 1px solid #2b2b2b;  /* 例としてオレンジ色を設定 */
+}
+
+.ul-redefinition ul {
     list-style-type: disc; /* 黒い点を設定 */
     padding-left: 1em;     /* リストの左側のスペースを追加 */
 }
 
-.ul-test ul ul {
+.ul-redefinition ul ul {
     list-style-type: circle; /* 2階層目は白抜きの点に */
 }
 
-.ul-test ul ul ul {
+.ul-redefinition ul ul ul {
     list-style-type: square; /* 3階層目は四角に */
 }
 
