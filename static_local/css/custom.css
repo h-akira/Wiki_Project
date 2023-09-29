@@ -15,15 +15,6 @@
     list-style-type: square; /* 3階層目は四角に */
 }
 
-/* ul { */
-/*   list-style-type: none; */
-/* } */
-/*  */
-/* li { */
-/*   margin-bottom: 1rem; */
-/*   font-family: 'Font Awesome 5 Free'; */
-/* } */
-
 .padding-top-56 {
   padding-top: 56px;
 }

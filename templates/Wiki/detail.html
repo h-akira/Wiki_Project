@@ -11,8 +11,10 @@
 
 {% block title %}{{ page.title }}{% endblock title %}
 {% block content %}
-<div class="card">
-  <div class="card-content has-background-grey has-text-white-bis">
+<div class="has-background-grey has-text-white-bis">
+  <div class="padding-side padding-top-10 padding-bottom-10">
+{# <div class="card"> #}
+  {# <div class="card-content has-background-grey has-text-white-bis"> #}
     <h1 class="title is-1 has-text-white-bis">
       {{ page.title }}
       {% if not page.public %}
@@ -24,7 +26,8 @@
     </p>
     {% if edit %}
     <p>
-      <a href="{% url 'Wiki:update' username slug %}" class="button is-success-dark">
+      {# <a href="{% url 'Wiki:update' username slug %}" class="button is-success-dark"> #}
+      <a href="{% url 'Wiki:update' username slug %}" class="button is-light">
         編集
         {% if not page.edit_permission %}
         <i class="bi bi-lock"></i>
@@ -34,7 +37,8 @@
     {% endif %}
   </div>
 </div>
-<div class="padding-side ul-redefinition" id="id_text">
+{# <div class="padding-side ul-redefinition" id="id_text"> #}
+<div class="padding-side content" id="id_text">
   {{ page.get_text_markdownx | safe }}
 </div>
 {% endblock content %}
