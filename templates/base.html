@@ -32,7 +32,8 @@
     <div id="navbarBasicExample" class="navbar-menu">
       <div class="navbar-start">
         <a class="navbar-item" href="{% url 'Wiki:index' %}">ホーム</a>
-        <a class="navbar-item" role="button" id="sidebar-toggle">記事</button>
+        {# <a class="navbar-item" role="button" id="sidebar-toggle">記事</button> #}
+        <a class="navbar-item sidebar-toggle" role="button">記事</button>
         <a class="navbar-item" href="{% url 'Wiki:create' %}">新規作成</a>
       </div>
       <div class="navbar-end">
@@ -51,6 +52,24 @@
   </nav>
   <aside id="sidebar" class="sidebar">
     <div class="has-background-grey-dark has-text-white">
+      {# <div class="column has-text-right"> #}
+        {# <button class="button sidebar-toggle delete is-dark"></button> #}
+      {# </div> #}
+    <div class="padding-all">
+      <div class="container">
+        <div class="columns no-margin">
+          <div class="column is-narrow">
+            階層図
+          </div>
+          <div class="column has-text-right">
+            <button class="button sidebar-toggle delete is-dark"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+      {# </div> #}
+      {# <div> #}
+      {# <button class="button sidebar-toggle delete is-dark"></button> #}
       <div class="tree">
         {% for html in nav_tree_htmls %}
         {{ html | safe  }}

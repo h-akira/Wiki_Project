@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-  var toggleButton = document.getElementById('sidebar-toggle');
+  var toggleButtons = document.querySelectorAll('.sidebar-toggle');
   var sidebar = document.getElementById('sidebar');
-  toggleButton.addEventListener('click', function() {
-    event.preventDefault();
-    sidebar.classList.toggle('is-active');
+  toggleButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      event.preventDefault();
+      sidebar.classList.toggle('is-active');
+    });
   });
 });
