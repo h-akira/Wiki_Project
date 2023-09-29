@@ -2,8 +2,7 @@
 {% load static %}
 
 {% block extra_css %}
-<link rel="stylesheet"href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/styles/default.min.css">
-<link rel="stylesheet" href="{% static 'css/menu.css' %}">
+{# <link rel="stylesheet"href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/styles/default.min.css"> #}
 {% endblock extra_css %}
 
 {% block title %}編集{% endblock title %}
@@ -23,12 +22,9 @@
     <a href="{% url 'Wiki:detail' username slug %}" class="button is-link is-light">戻る</a>
     <a class="button js-modal-trigger is-link is-light" data-target="delete">削除</a>
   {% endif %}
-  {# <hr> #}
     {% csrf_token %}
-    {# <pre>タイトル&#009;：</pre> #}
     <p>タイトル：</p>
     <p>{{ form.title }}</p>
-    {# <pre>スラッグ&#009;：{{ form.slug }}</pre> #}
     <p>スラッグ：{{ form.slug }}</p>
     <p>優先度　：{{ form.priority }}</p>
     {% if author %}
@@ -40,12 +36,11 @@
       <p id="edit-permission">編集許可：{{ form.edit_permission }}</p>
     </div>
     {% endif %}
-    <hr>
     <p>
       {{ form.media }}
       {{ form.text }}
+      {# {{ form.media }} #}
     </p>
-    {# {{ form.media }} #}
     <hr>
     <button type="submit" name="action" value="detail" class="button is-link">
       保存して終了
@@ -57,7 +52,6 @@
     <a href="{% url 'Wiki:detail' username slug %}" class="button is-link is-light">
       戻る
     </a>
-    {# <a class="button" data-bs-toggle="modal" data-bs-target="#delete"> #}
     <a class="button js-modal-trigger is-link is-light" data-target="delete">
       削除
     </a>
@@ -72,12 +66,10 @@
 {% block extra_js %}
 {# <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.16.2/build/highlight.min.js"></script> #}
 {# <script>hljs.initHighlightingOnLoad();</script> #}
-{# <script src="{% static 'js/textarea.js' %}"></script> #}
 {% if author %}
 <script src="{% static 'js/edit_permission.js' %}"></script>
 {% endif %}
 {%if type == "update" %}
 <script src="{% static 'js/modal.js' %}"></script>
 {% endif %}
-{# <script src="{% static 'js/menu.js' %}"></script> #}
 {% endblock extra_js %}

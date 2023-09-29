@@ -1,3 +1,19 @@
+.sidebar {
+  position: fixed;
+  top: 3.25rem;
+  left: -600px;
+  width: 600px;
+  /* height: 100vh; */
+  /* background-color: #f5f5f5; */
+  overflow-y: auto;
+  transition: left 0.3s;
+  z-index: 1000; 
+}
+
+.sidebar.is-active {
+  left: 0;
+}
+
 .card-bordered {
   border: 1px solid #2b2b2b;  /* 例としてオレンジ色を設定 */
 }
@@ -14,14 +30,6 @@
 .ul-redefinition ul ul ul {
     list-style-type: square; /* 3階層目は四角に */
 }
-
-.padding-top-56 {
-  padding-top: 56px;
-}
-
-/* .padding-top-seccond { */
-  /* padding-top: 45px; */
-/* } */
 
 .padding-side {
   padding-left: 10px;
@@ -44,21 +52,6 @@
   color: white;
   text-decoration: underline;
   text-decoration-color: white;
-}
-
-/* .custom-container { */
-/*   padding-left: 10px; */
-/*   padding-right: 10px; */
-/*   margin-left: 10px; */
-/*   margin-right: 10px; */
-/* } */
-
-.markdownx table {
-    border-collapse: collapse;
-}
-
-.markdownx th,td {
-    border: solid 2px;
 }
 
 /* 参考 */

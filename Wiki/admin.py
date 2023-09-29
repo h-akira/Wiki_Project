@@ -1,5 +1,11 @@
 from django.contrib import admin
+from django.db import models
 from .models import PageTable
-from markdownx.admin import MarkdownxModelAdmin
+from mdeditor.widgets import MDEditorWidget
 
-admin.site.register(PageTable, MarkdownxModelAdmin)
+class PageTableAdmin(admin.ModelAdmin):
+  formfield_overrides = {
+    models.TextField: {'widget': MDEditorWidget}
+  }
+
+admin.site.register(PageTable, PageTableAdmin)

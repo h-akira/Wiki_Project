@@ -18,7 +18,6 @@ from datetime import datetime
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # Application definition
-
 INSTALLED_APPS = [
   'django.contrib.admin',
   'django.contrib.auth',
@@ -29,9 +28,22 @@ INSTALLED_APPS = [
   'django.forms',
   'Wiki.apps.WikiConfig',
   'accounts.apps.AccountsConfig',
-  # 'markdownx',
   'mdeditor',
 ]
+
+# MDEDITOR_CONFIGS
+X_FRAME_OPTIONS = 'SAMEORIGIN' 
+MDEDITOR_CONFIGS = {
+    'default': {
+        'language': 'en',
+        'toolbar': ["undo", "redo", "image", "|",
+                    "bold", "quote", "|",
+                    "h1", "h2", "h3", "h5", "h6", "|",
+                    "list-ul", "list-ol", "hr", "|",
+                    "||", "preview", "watch", "fullscreen"],
+        'lineWrapping': True
+    }
+}
 
 MIDDLEWARE = [
   'django.middleware.security.SecurityMiddleware',
@@ -65,7 +77,6 @@ WSGI_APPLICATION = 'Wiki_Project.wsgi.application'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
   {
     'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -84,46 +95,36 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
-
 LANGUAGE_CODE = 'ja'
-
 TIME_ZONE = 'Asia/Tokyo'
-
 USE_I18N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static_local"),]
 if not DEBUG:
   STATIC_ROOT = os.path.join(BASE_DIR,'static') 
-# STATIC_ORDER = (
-  # 'django.contrib.staticfiles',
-  # 'mdeditor',
-# )
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
-MARKDOWN_EXTENSIONS = [
-  'markdown.extensions.extra',  # テーブル，コードブロック等
-  'markdown.extensions.codehilite',  # コードハイライト
-  'markdown.extensions.toc',  # 目次
-  'markdown.extensions.nl2br',  # 改行
-	'markdown.extensions.sane_lists',  # 箇条関係
-]
-# 追加する場合は以下のページから選択する．
-# https://python-markdown.github.io/extensions/
+# MARKDOWN_EXTENSIONS = [
+#   'markdown.extensions.extra',  # テーブル，コードブロック等
+#   'markdown.extensions.codehilite',  # コードハイライト
+#   'markdown.extensions.toc',  # 目次
+#   'markdown.extensions.nl2br',  # 改行
+# 	'markdown.extensions.sane_lists',  # 箇条関係
+# ]
+## 追加する場合は以下のページから選択する．
+## https://python-markdown.github.io/extensions/
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
@@ -131,14 +132,3 @@ LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "Wiki:index"
 LOGOUT_REDIRECT_URL = "Wiki:index"  
 
-MDEDITOR_CONFIGS = {
-    'default': {
-        'language': 'en',
-        'toolbar': ["undo", "redo", "image", "|",
-                    "bold", "quote", "|",
-                    "h1", "h2", "h3", "h5", "h6", "|",
-                    "list-ul", "list-ol", "hr", "|",
-                    "||", "preview", "watch", "fullscreen"],
-        'lineWrapping': True
-    }
-}
