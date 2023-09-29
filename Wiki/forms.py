@@ -1,6 +1,6 @@
 from django import forms
+from django.forms import modelformset_factory
 from .models import PageTable
-from markdownx.widgets import MarkdownxWidget
 
 class PageForm(forms.ModelForm):
   class Meta:
@@ -20,3 +20,14 @@ class PageForm(forms.ModelForm):
     }
 
 
+PageSettingsFormSet = modelformset_factory(
+  PageTable, 
+  fields=(
+    "title",
+    "slug",
+    "priority",
+    "public",
+    "edit_permission"
+  ), 
+  extra=0
+)

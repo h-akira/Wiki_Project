@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .models import PageTable
-from .forms import PageForm
+from .forms import PageForm, PageSettingsFormSet
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
@@ -103,3 +103,23 @@ def delete(request, id):
   if request.user == page.user or page.edit_permission:
     page.delete()
   return redirect("Wiki:index")
+
+from django.forms import modelformset_factory
+
+def page_settings(request):
+  # PageSettingsFormSet = modelformset_factory(PageTable, fields=('public', 'edit_permission'), extra=0)
+  pages = PageTable.objects.filter(user=request.user)
+  if request.method == "POST":
+    formset = PageSettingsFormSet(request.POST, queryset=pages)
+    if formset.is_valid():
+      formset.save()
+      return redirect("Wiki:page_settings")
+    # else:
+      # print(formset.errors)
+  else:
+    formset = PageSettingsFormSet(queryset=pages)
+    context = {
+      "formset_pages": zip(formset, pages),
+      "nav_tree_htmls":lib.wiki.gen_tree_htmls(request, User, PageTable, a_white=True)
+    }
+    return render(request, 'Wiki/page_settings.html', context)
