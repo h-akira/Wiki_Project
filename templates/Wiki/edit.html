@@ -41,21 +41,21 @@
       {{ form.text }}
       {# {{ form.media }} #}
     </p>
-    <hr>
-    <button type="submit" name="action" value="detail" class="button is-link">
-      保存して終了
-    </button>
-    <button type="submit" name="action" value="update" class="button is-link">
-      保存して継続
-    </button>
-    {%if type == "update" %}
-    <a href="{% url 'Wiki:detail' username slug %}" class="button is-link is-light">
-      戻る
-    </a>
-    <a class="button js-modal-trigger is-link is-light" data-target="delete">
-      削除
-    </a>
-    {% endif %}
+    {# <hr> #}
+    {# <button type="submit" name="action" value="detail" class="button is-link"> #}
+    {#   保存して終了 #}
+    {# </button> #}
+    {# <button type="submit" name="action" value="update" class="button is-link"> #}
+    {#   保存して継続 #}
+    {# </button> #}
+    {# {%if type == "update" %} #}
+    {# <a href="{% url 'Wiki:detail' username slug %}" class="button is-link is-light"> #}
+    {#   戻る #}
+    {# </a> #}
+    {# <a class="button js-modal-trigger is-link is-light" data-target="delete"> #}
+    {#   削除 #}
+    {# </a> #}
+    {# {% endif %} #}
   </form>
   {%if type == "update" %}
   {% include 'Wiki/delete_modal.html' %}

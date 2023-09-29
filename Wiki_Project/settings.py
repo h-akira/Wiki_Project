@@ -31,18 +31,21 @@ INSTALLED_APPS = [
   'mdeditor',
 ]
 
-# MDEDITOR_CONFIGS
+# MDEDITOR
 X_FRAME_OPTIONS = 'SAMEORIGIN' 
 MDEDITOR_CONFIGS = {
-    'default': {
-        'language': 'en',
-        'toolbar': ["undo", "redo", "image", "|",
-                    "bold", "quote", "|",
-                    "h1", "h2", "h3", "h5", "h6", "|",
-                    "list-ul", "list-ol", "hr", "|",
-                    "||", "preview", "watch", "fullscreen"],
-        'lineWrapping': True
-    }
+  'default': {
+    'language': 'en',
+    'height': 600,
+    'toolbar': [
+      "undo", "redo", "image", "|",
+      "bold", "quote", "|",
+      "h1", "h2", "h3", "h5", "h6", "|",
+      "list-ul", "list-ol", "hr", "|",
+      "||", "preview", "watch", "fullscreen"
+    ],
+    'lineWrapping': True,
+  }
 }
 
 MIDDLEWARE = [
@@ -92,14 +95,12 @@ AUTH_PASSWORD_VALIDATORS = [
   },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 LANGUAGE_CODE = 'ja'
 TIME_ZONE = 'Asia/Tokyo'
 USE_I18N = True
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -115,7 +116,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
+# MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d')
 # MARKDOWN_EXTENSIONS = [
 #   'markdown.extensions.extra',  # テーブル，コードブロック等
 #   'markdown.extensions.codehilite',  # コードハイライト
