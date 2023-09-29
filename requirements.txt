@@ -2,7 +2,7 @@ asgiref==3.7.2
 beautifulsoup4==4.12.2
 bs4==0.0.1
 Django==4.2.5
-django-markdownx==4.0.2
+django-mdeditor==0.1.20
 Markdown==3.4.4
 Pillow==9.5.0
 Pygments==2.16.1
