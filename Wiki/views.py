@@ -2,11 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.db import models
 from .models import PageTable
 from .forms import PageForm, PageSettingsFormSet
 # 独自ライブラリ
-from tree_package import Tree, gen_tree_htmls
+from tree import Tree, gen_tree_htmls, gen_pages_ordered_by_tree
 
 def index(request):
   if request.user.is_authenticated:
@@ -103,11 +102,10 @@ def delete(request, id):
     page.delete()
   return redirect("Wiki:index")
 
-
 @login_required
 def page_settings(request):
-  pages = PageTable.objects.filter(user=request.user)
   if request.method == "POST":
+    pages = PageTable.objects.filter(user=request.user)
     formset = PageSettingsFormSet(request.POST, queryset=pages)
     if formset.is_valid():
       formset.save()
@@ -126,19 +124,8 @@ def page_settings(request):
       print("---------------")
       raise Exception
   else:
-    # 並び替え
-    pages = pages.order_by('-priority')
-    data = []
-    for page in pages:
-      data.append(page.slug.split("/"))
-    tree = Tree(request.user.username, data=data)
-    page_list = tree.gen_obj_list(request.user.username, User, PageTable)
-    page_ids = [i.pk for i in page_list]
-    pages = pages.order_by(
-      models.Case(
-        *[models.When(pk=pk, then=pos) for pos, pk in enumerate(page_ids)]
-      )
-    )
+    # 階層図の並び順に並び替えられたQuerSet
+    pages = gen_pages_ordered_by_tree(request, User, PageTable)
     # 一つのフォームにする
     formset = PageSettingsFormSet(queryset=pages)
     context = {

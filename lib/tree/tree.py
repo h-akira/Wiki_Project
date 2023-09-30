@@ -88,3 +88,20 @@ def gen_tree_htmls(request, User, PageTable, a_white=True):
     else:
       htmls.append(tree.gen_html(user.username))
   return htmls
+
+
+def gen_pages_ordered_by_tree(request, User, PageTable):
+  from django.db import models
+  pages = PageTable.objects.filter(user=request.user).order_by('-priority')
+  data = []
+  for page in pages:
+    data.append(page.slug.split("/"))
+  tree = Tree(request.user.username, data=data)
+  page_list = tree.gen_obj_list(request.user.username, User, PageTable)
+  page_ids = [i.pk for i in page_list]
+  pages = pages.order_by(
+    models.Case(
+      *[models.When(pk=pk, then=pos) for pos, pk in enumerate(page_ids)]
+    )
+  )
+  return pages
