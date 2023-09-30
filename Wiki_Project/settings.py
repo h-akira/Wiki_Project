@@ -12,10 +12,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from .settings_local import *
 import os
+import sys
 from datetime import datetime
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+
+# 独自ライブラリ
+LIB_DIR = os.path.join(BASE_DIR, 'lib')
+sys.path.append(LIB_DIR)
 
 # Application definition
 INSTALLED_APPS = [

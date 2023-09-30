@@ -8,8 +8,8 @@ from .forms import PageForm, PageSettingsFormSet
 # from django.forms import modelformset_factory
 import os
 import sys
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-import lib
+# sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+import tree_package as tp
 
 def index(request):
   if request.user.is_authenticated:
@@ -17,8 +17,8 @@ def index(request):
   else:
     pages = PageTable.objects.filter(public=True).order_by("-last_updated")
   context = {
-    "tree_htmls":lib.wiki.gen_tree_htmls(request, User, PageTable, a_white=False),
-    "nav_tree_htmls":lib.wiki.gen_tree_htmls(request, User, PageTable, a_white=True),
+    "tree_htmls":tp.wiki.gen_tree_htmls(request, User, PageTable, a_white=False),
+    "nav_tree_htmls":tp.wiki.gen_tree_htmls(request, User, PageTable, a_white=True),
     "pages": pages
   }
   return render(request, 'Wiki/index.html', context)
@@ -37,7 +37,7 @@ def detail(request, username, slug):
     "username": username,
     "slug": slug,
     "edit": edit,
-    "nav_tree_htmls":lib.wiki.gen_tree_htmls(request, User, PageTable, a_white=True)
+    "nav_tree_htmls":tp.wiki.gen_tree_htmls(request, User, PageTable, a_white=True)
   }
   return render(request, 'Wiki/detail.html', context)
 
@@ -60,7 +60,7 @@ def create(request):
     context = {
       "form": form,
       "type": "create",
-      "nav_tree_htmls":lib.wiki.gen_tree_htmls(request, User, PageTable, a_white=True)
+      "nav_tree_htmls":tp.wiki.gen_tree_htmls(request, User, PageTable, a_white=True)
     }
     return render(request, 'Wiki/edit.html', context)
 
@@ -93,7 +93,7 @@ def update(request, username, slug):
         "form": form,
         "type": "update",
         "author": author,
-        "nav_tree_htmls":lib.wiki.gen_tree_htmls(request, User, PageTable, a_white=True)
+        "nav_tree_htmls":tp.wiki.gen_tree_htmls(request, User, PageTable, a_white=True)
       }
       return render(request, 'Wiki/edit.html', context)
   else:
@@ -134,7 +134,7 @@ def page_settings(request):
     data = []
     for page in pages:
       data.append(page.slug.split("/"))
-    tree = lib.Tree(request.user.username, data=data)
+    tree = tp.Tree(request.user.username, data=data)
     page_list = tree.gen_obj_list(request.user.username, User, PageTable)
     page_ids = [i.pk for i in page_list]
     pages = pages.order_by(
@@ -147,6 +147,6 @@ def page_settings(request):
     context = {
       "formset": formset,
       "pages": pages,
-      "nav_tree_htmls":lib.wiki.gen_tree_htmls(request, User, PageTable, a_white=True)
+      "nav_tree_htmls":tp.wiki.gen_tree_htmls(request, User, PageTable, a_white=True)
     }
     return render(request, 'Wiki/page_settings.html', context)
