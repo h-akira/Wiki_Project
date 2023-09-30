@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 
 class Tree:
   def __init__(self, name, data, upper_slug="", top=True, end=False):
+    # dataは/でsplitされたリストを要素に持つリスト（すなわち二次元のリスト）
     self.name = name
     self.end = end
     if top:
@@ -54,4 +55,7 @@ class Tree:
       soup = BeautifulSoup(text, "html.parser")
       text = soup.prettify()
     return text
+  
+  def gen_obj_list(username, User, PageTable):
+    pass
 

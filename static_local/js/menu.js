@@ -1,3 +1,5 @@
+// 公式をコピペ
+// https://bulma.io/documentation/components/navbar/
 document.addEventListener('DOMContentLoaded', () => {
 
   // Get all "navbar-burger" elements

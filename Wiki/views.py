@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .models import PageTable
 from .forms import PageForm, PageSettingsFormSet
+# from django.forms import modelformset_factory
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
@@ -104,7 +105,6 @@ def delete(request, id):
     page.delete()
   return redirect("Wiki:index")
 
-from django.forms import modelformset_factory
 
 def page_settings(request):
   # PageSettingsFormSet = modelformset_factory(PageTable, fields=('public', 'edit_permission'), extra=0)
@@ -113,13 +113,22 @@ def page_settings(request):
     formset = PageSettingsFormSet(request.POST, queryset=pages)
     if formset.is_valid():
       formset.save()
-      return redirect("Wiki:page_settings")
+      if request.POST['action'] == 'continue':
+        return redirect("Wiki:page_settings")
+      elif request.POST['action'] == 'end':
+        return redirect("Wiki:index")
+      else:
+        raise Exception
     # else:
-      # print(formset.errors)
+    #   print("-------------")
+    #   print(formset.errors)
+    #   print(formset.management_form.errors)
+    #   print("-------------")
   else:
     formset = PageSettingsFormSet(queryset=pages)
     context = {
-      "formset_pages": zip(formset, pages),
+      "formset": formset,
+      "pages": pages,
       "nav_tree_htmls":lib.wiki.gen_tree_htmls(request, User, PageTable, a_white=True)
     }
     return render(request, 'Wiki/page_settings.html', context)

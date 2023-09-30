@@ -19,15 +19,18 @@ class PageForm(forms.ModelForm):
       ),
     }
 
+class PageSettingsForm(forms.ModelForm):
+  class Meta:
+    model = PageTable
+    fields = ["title", "slug", "priority", "public", "edit_permission"]
+    widgets = {
+      'title': forms.TextInput(attrs={'style': 'width: 300px;'}),
+      'slug': forms.TextInput(attrs={'style': 'width: 220px;'}),
+      'priority': forms.NumberInput(attrs={"step":"0.1", "style": "width:70px;"}),
+    }
 
 PageSettingsFormSet = modelformset_factory(
   PageTable, 
-  fields=(
-    "title",
-    "slug",
-    "priority",
-    "public",
-    "edit_permission"
-  ), 
+  form=PageSettingsForm,
   extra=0
 )
