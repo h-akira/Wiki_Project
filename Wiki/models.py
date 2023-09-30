@@ -11,7 +11,7 @@ class PageTable(models.Model):
   slug = models.CharField(max_length=127)
   priority = models.FloatField(default=0)
   title = models.CharField(max_length=127)
-  public = models.BooleanField(default=True)
+  public = models.BooleanField(default=False)
   edit_permission = models.BooleanField(default=False)
   text = MDTextField(null=True, blank=True) # 変更
   # test_text = MDTextField(null=True, blank=True) # 変更
