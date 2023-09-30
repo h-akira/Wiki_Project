@@ -106,6 +106,7 @@ def delete(request, id):
   return redirect("Wiki:index")
 
 
+@login_required
 def page_settings(request):
   # PageSettingsFormSet = modelformset_factory(PageTable, fields=('public', 'edit_permission'), extra=0)
   pages = PageTable.objects.filter(user=request.user)
