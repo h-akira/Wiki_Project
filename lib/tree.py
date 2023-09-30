@@ -56,6 +56,14 @@ class Tree:
       text = soup.prettify()
     return text
   
-  def gen_obj_list(username, User, PageTable):
-    pass
+  def gen_obj_list(self, username, User, PageTable):
+    obj_list = []
+    if self.end:
+      user = User.objects.get(username=username)
+      obj = PageTable.objects.get(user=user, slug=self.slug)
+      obj_list.append(obj)
+    if len(self.nexts):
+      for next_tree in self.nexts:
+        obj_list += next_tree.gen_obj_list(username, User=User, PageTable=PageTable)
+    return obj_list
 
