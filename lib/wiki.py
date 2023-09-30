@@ -24,3 +24,4 @@ def gen_tree_htmls(request, User, PageTable, a_white=True):
     else:
       htmls.append(tree.gen_html(user.username))
   return htmls
+

@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.db import models
 from .models import PageTable
 from .forms import PageForm, PageSettingsFormSet
 # from django.forms import modelformset_factory
@@ -108,7 +109,6 @@ def delete(request, id):
 
 @login_required
 def page_settings(request):
-  # PageSettingsFormSet = modelformset_factory(PageTable, fields=('public', 'edit_permission'), extra=0)
   pages = PageTable.objects.filter(user=request.user)
   if request.method == "POST":
     formset = PageSettingsFormSet(request.POST, queryset=pages)
@@ -120,12 +120,29 @@ def page_settings(request):
         return redirect("Wiki:index")
       else:
         raise Exception
-    # else:
-    #   print("-------------")
-    #   print(formset.errors)
-    #   print(formset.management_form.errors)
-    #   print("-------------")
+    else:
+      print("---- Error ----")
+      print("formset.errors:")
+      print(formset.errors)
+      print("formset.management_form.erros:")
+      print(formset.management_form.errors)
+      print("---------------")
+      raise Exception
   else:
+    # 並び替え
+    pages = pages.order_by('-priority')
+    data = []
+    for page in pages:
+      data.append(page.slug.split("/"))
+    tree = lib.Tree(request.user.username, data=data)
+    page_list = tree.gen_obj_list(request.user.username, User, PageTable)
+    page_ids = [i.pk for i in page_list]
+    pages = pages.order_by(
+      models.Case(
+        *[models.When(pk=pk, then=pos) for pos, pk in enumerate(page_ids)]
+      )
+    )
+    # 一つのフォームにする
     formset = PageSettingsFormSet(queryset=pages)
     context = {
       "formset": formset,
