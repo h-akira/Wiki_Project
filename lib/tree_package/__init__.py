@@ -1,3 +1,2 @@
-from .tree import Tree
-from . import wiki
-__all__ = ["Tree","wiki"]
+from .tree import Tree, gen_tree_htmls
+__all__ = ["Tree","gen_tree_htmls"]
