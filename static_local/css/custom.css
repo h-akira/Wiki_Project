@@ -20,6 +20,7 @@
   left: -450px;
   width: 450px;
   max-width: 100%;
+  height: calc(100vh - 3.25rem);
   /* height: 100vh; */
   /* background-color: #4a4a4a; */
   overflow-y: auto;
