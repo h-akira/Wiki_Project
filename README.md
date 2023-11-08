@@ -14,7 +14,7 @@ pip3 install -r requirements.txt
 ```
 In the `settings.py`, Read `settings_local.py` by `import` to set `SECRET_KEY` and other individual settings. 
 You can copy and edit `Wiki_Project/settings_local_sample.py`, 
-or automatically generate `SECRET_KEY` by using `bin/add_secret_key.py`. 
+or automatically generate `settings_local.py` with `SECRET_KEY` by using `bin/add_secret_key.py`. 
 Because Symbolic links are placed in the hierarchy `Wiki_Project/Wiki_Project`, 
 Plese execute it. 
 ```
