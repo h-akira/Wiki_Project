@@ -6,6 +6,7 @@ from .models import PageTable
 from .forms import PageForm, PageSettingsFormSet
 # 独自ライブラリ
 from tree import Tree, gen_tree_htmls, gen_pages_ordered_by_tree
+from urllib.parse import quote
 
 def index(request):
   if request.user.is_authenticated:
@@ -21,7 +22,10 @@ def index(request):
 
 def detail(request, username, slug):
   user = User.objects.get(username=username)
-  page = PageTable.objects.get(user=user, slug=slug)
+  try:
+    page = PageTable.objects.get(user=user, slug=slug)
+  except PageTable.DoesNotExist:
+    return redirect("Wiki:create_with_slug",slug=slug)
   if not page.public and page.user != request.user:
     return redirect("Wiki:index")
   if page.user == request.user or (request.user.is_authenticated and page.edit_permission):
@@ -38,7 +42,7 @@ def detail(request, username, slug):
   return render(request, 'Wiki/detail.html', context)
 
 @login_required
-def create(request):
+def create(request, slug=None):
   if request.method == 'POST':
     form = PageForm(request.POST)
     if form.is_valid():
@@ -52,7 +56,7 @@ def create(request):
       else:
         raise Exception
   else:
-    form = PageForm()
+    form = PageForm(initial={'slug': slug})
     context = {
       "form": form,
       "type": "create",
@@ -63,8 +67,10 @@ def create(request):
 @login_required
 def update(request, username, slug):
   user = User.objects.get(username=username)
-  # page = PageTable.objects.get(user=user, slug=slug)
-  page = get_object_or_404(PageTable, user=user, slug=slug)
+  try:
+    page = PageTable.objects.get(user=user, slug=slug)
+  except PageTable.DoesNotExist:
+    return redirect("Wiki:create_with_slug",slug=slug)
   if page.user == request.user or page.edit_permission:
     if request.method == 'POST':
       form = PageForm(request.POST, instance=page)
