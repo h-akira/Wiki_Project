@@ -1,11 +1,12 @@
 from django.urls import path, re_path
-from .views import index, detail, create, update, delete, page_settings
+from .views import index, detail, create, update, delete, page_settings, share_detail
 
 app_name = "Wiki"
 
 urlpatterns = [
   path('',index, name='index'),
   path('create/',create, name='create'),
+  path('share/detail/<str:share_code>/', share_detail, name='share_detail'),
   re_path(r'^create/(?P<slug>.+)/$', create, name='create_with_slug'),
   path('settings/',page_settings, name='page_settings'),
   re_path(r'^detail/(?P<username>[^/]+)/(?P<slug>.+)/$', detail, name='detail'),

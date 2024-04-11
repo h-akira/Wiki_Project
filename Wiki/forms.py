@@ -5,7 +5,17 @@ from .models import PageTable
 class PageForm(forms.ModelForm):
   class Meta:
     model = PageTable
-    fields = ("slug", "priority", "public", "edit_permission", "title", "text")
+    fields = (
+      "slug",
+      "priority",
+      "public",
+      "edit_permission",
+      "title",
+      "text",
+      "share",
+      "share_code",
+      "share_edit_permission"
+    )
     widgets = {
       'title': forms.TextInput(
         attrs={
@@ -13,6 +23,11 @@ class PageForm(forms.ModelForm):
         }
       ),
       'slug': forms.TextInput(
+        attrs={
+          'style': 'width: 500px;'
+        }
+      ),
+      'share_code': forms.TextInput(
         attrs={
           'style': 'width: 500px;'
         }

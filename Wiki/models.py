@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe
 from django.core.exceptions import ValidationError
 from mdeditor.fields import MDTextField # 追加
+from django.core.validators import RegexValidator
 
 class PageTable(models.Model):
   user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -13,6 +14,15 @@ class PageTable(models.Model):
   title = models.CharField(max_length=127)
   public = models.BooleanField(default=False)
   edit_permission = models.BooleanField(default=False)
+  share = models.BooleanField(default=False)
+  share_edit_permission = models.BooleanField(default=False)
+  share_code = models.CharField(
+    max_length=127,
+    null=True,
+    blank=True,
+    validators=[RegexValidator(r'^[a-zA-Z0-9]+$')],
+    unique=True
+  )
   text = MDTextField(null=True, blank=True) # 変更
   # test_text = MDTextField(null=True, blank=True) # 変更
   # def get_text_markdownx(self):
@@ -20,6 +30,8 @@ class PageTable(models.Model):
   def clean(self):
     if self.edit_permission and not self.public:
       raise ValidationError("編集許可をTrueにするには公開もTrueにする必要があります．")
+    if self.share_edit_permission and not self.share:
+      raise ValidationError("共有編集をTrueにするには共有もTrueにする必要があります．")
   def save(self, *args, **kwargs):
     self.clean()
     super().save(*args, **kwargs)

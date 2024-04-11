@@ -2,8 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.urls import reverse
 from .models import PageTable
 from .forms import PageForm, PageSettingsFormSet
+import random
 # 独自ライブラリ
 from tree import Tree, gen_tree_htmls, gen_pages_ordered_by_tree
 from urllib.parse import quote
@@ -20,6 +22,10 @@ def index(request):
   }
   return render(request, 'Wiki/index.html', context)
 
+def share_detail(request, share_code):
+  page = PageTable.objects.get(share_code=share_code)
+  return detail(request, page.user.username, page.slug)
+
 def detail(request, username, slug):
   user = User.objects.get(username=username)
   try:
@@ -32,12 +38,19 @@ def detail(request, username, slug):
     edit = True
   else:
     edit = False
+  if page.share:
+    print(page.share_code)
+    share_url = reverse('Wiki:share_detail', args=[page.share_code])
+    print(share_url)
+  else:
+    share_url = None
   context = {
     "page": page,
     "username": username,
     "slug": slug,
+    "share_url": share_url,
     "edit": edit,
-    "nav_tree_htmls":gen_tree_htmls(request, User, PageTable, a_white=True)
+    "nav_tree_htmls":gen_tree_htmls(request, User, PageTable, a_white=True),
   }
   return render(request, 'Wiki/detail.html', context)
 
@@ -56,10 +69,18 @@ def create(request, slug=None):
       else:
         raise Exception
   else:
-    form = PageForm(initial={'slug': slug})
+    allow="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    share_code = ''.join(random.choice(allow) for i in range(length))
+    form = PageForm(
+      initial={
+        'slug': slug,
+        'share_code': share_code,
+      }
+    )
     context = {
       "form": form,
       "type": "create",
+      "author": True,
       "nav_tree_htmls":gen_tree_htmls(request, User, PageTable, a_white=True)
     }
     return render(request, 'Wiki/edit.html', context)
@@ -140,3 +161,6 @@ def page_settings(request):
       "nav_tree_htmls":gen_tree_htmls(request, User, PageTable, a_white=True)
     }
     return render(request, 'Wiki/page_settings.html', context)
+
+
+
