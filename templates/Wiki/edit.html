@@ -9,7 +9,12 @@
 
 {% block content %}
 <div class="padding-side padding-top-10">
-  {% if type == "create" or type != "update" %}
+  {% if share %}
+  <form class="" action="{% url 'Wiki:share_update' share_code %}" method="post">
+    <button type="submit" name="action" value="detail" class="button is-link">保存して終了</button>
+    <button type="submit" name="action" value="update" class="button is-link">保存して継続</button>
+    <a href="{% url 'Wiki:share_detail' share_code %}" class="button is-link is-light">戻る</a>
+  {% elif type == "create" or type != "update" %}
   {# <h1 class="title is-1">新規作成</h1> #}
   <form class="" action="{% url 'Wiki:create' %}" method="post">
     <button type="submit" name="action" value="detail" class="button is-link">保存して終了</button>
@@ -31,7 +36,7 @@
     <p>公開　　：{{ form.public }}</p>
     <p id="edit-permission">編集許可：{{ form.edit_permission }}</p>
     <p>共有　　：{{ form.share }}</p>
-    <p id="share-code">共有コード：{{ form.share_code }}</p>
+    <p id="share-code">共有コード　：{{ form.share_code }}</p>
     <br>
     <p id="share-edit-permission">共有編集許可：{{ form.share_edit_permission }}</p>
     {% else %}
@@ -39,6 +44,7 @@
       <p>公開　　：{{ form.public }}</p>
       <p id="edit-permission">編集許可：{{ form.edit_permission }}</p>
       <p>共有　　：{{ form.share }}</p>
+      <p id="share-code">共有コード　：{{ form.share_code }}</p>
       <br>
       <p id="share-edit-permission">共有編集許可：{{ form.share_edit_permission }}</p>
     </div>

@@ -25,9 +25,9 @@ def index(request):
 
 def share_detail(request, share_code):
   page = PageTable.objects.get(share_code=share_code)
-  return detail(request, page.user.username, page.slug)
+  return detail(request, page.user.username, page.slug, share=True)
 
-def detail(request, username, slug):
+def detail(request, username, slug, share=False):
   user = User.objects.get(username=username)
   try:
     page = PageTable.objects.get(user=user, slug=slug)
@@ -47,6 +47,7 @@ def detail(request, username, slug):
     "page": page,
     "username": username,
     "slug": slug,
+    "share": share,
     "share_url": share_url,
     "share_code": page.share_code,
     "edit": edit,
@@ -85,8 +86,12 @@ def create(request, slug=None):
     }
     return render(request, 'Wiki/edit.html', context)
 
+def share_update(request, share_code):
+  page = PageTable.objects.get(share_code=share_code)
+  return update(request, page.user.username, page.slug, share=True)
+
 @login_required
-def update(request, username, slug):
+def update(request, username, slug, share=False):
   user = User.objects.get(username=username)
   try:
     page = PageTable.objects.get(user=user, slug=slug)
@@ -98,9 +103,15 @@ def update(request, username, slug):
       if form.is_valid():
         form.save()
         if request.POST['action'] == 'update':
-          return redirect("Wiki:update",username,form.instance.slug)
+          if share:
+            return redirect("Wiki:share_update",page.share_code)
+          else:
+            return redirect("Wiki:update",username,form.instance.slug)
         elif request.POST['action'] == 'detail':
-          return redirect("Wiki:detail",username,form.instance.slug)
+          if share:
+            return redirect("Wiki:share_detail",page.share_code)
+          else:
+            return redirect("Wiki:detail",username,form.instance.slug)
         else:
           raise Exception
     else:
@@ -116,6 +127,8 @@ def update(request, username, slug):
         "form": form,
         "type": "update",
         "author": author,
+        "share": share,
+        "share_code": page.share_code,
         "nav_tree_htmls":gen_tree_htmls(request, User, PageTable, a_white=True)
       }
       return render(request, 'Wiki/edit.html', context)
