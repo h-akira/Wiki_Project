@@ -6,6 +6,7 @@ from django.urls import reverse
 from .models import PageTable
 from .forms import PageForm, PageSettingsFormSet
 import random
+from django.conf import settings
 # 独自ライブラリ
 from tree import Tree, gen_tree_htmls, gen_pages_ordered_by_tree
 from urllib.parse import quote
@@ -39,9 +40,7 @@ def detail(request, username, slug):
   else:
     edit = False
   if page.share:
-    print(page.share_code)
-    share_url = reverse('Wiki:share_detail', args=[page.share_code])
-    print(share_url)
+    share_url = f"{settings.DOMAIN}{reverse('Wiki:share_detail', args=[page.share_code])}"
   else:
     share_url = None
   context = {
@@ -49,6 +48,7 @@ def detail(request, username, slug):
     "username": username,
     "slug": slug,
     "share_url": share_url,
+    "share_code": page.share_code,
     "edit": edit,
     "nav_tree_htmls":gen_tree_htmls(request, User, PageTable, a_white=True),
   }
