@@ -33,7 +33,7 @@ def detail(request, username, slug, share=False):
     page = PageTable.objects.get(user=user, slug=slug)
   except PageTable.DoesNotExist:
     return redirect("Wiki:create_with_slug",slug=slug)
-  if not page.public and page.user != request.user:
+  if not share and not page.public and page.user != request.user:
     return redirect("Wiki:index")
   if page.user == request.user or (request.user.is_authenticated and page.edit_permission):
     edit = True
