@@ -71,6 +71,7 @@ def create(request, slug=None):
         raise Exception
   else:
     allow="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    length=32
     share_code = ''.join(random.choice(allow) for i in range(length))
     form = PageForm(
       initial={
