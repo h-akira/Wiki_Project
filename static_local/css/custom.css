@@ -1,3 +1,7 @@
+.img-center {
+  text-align:center;
+}
+
 /* navbarの背景色とテキストカラー */
 .navbar, .navbar-menu {
     background-color: #363636 !important; /* 背景色を#333（暗灰色）に設定 */

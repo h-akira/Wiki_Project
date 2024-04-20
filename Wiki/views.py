@@ -7,6 +7,7 @@ from .models import PageTable
 from .forms import PageForm, PageSettingsFormSet
 import random
 from django.conf import settings
+# from django.views.generic import TemplateView
 # 独自ライブラリ
 from tree import Tree, gen_tree_htmls, gen_pages_ordered_by_tree
 from urllib.parse import quote
@@ -24,17 +25,28 @@ def index(request):
   return render(request, 'Wiki/index.html', context)
 
 def share_detail(request, share_code):
-  page = PageTable.objects.get(share_code=share_code)
+  try:
+    page = PageTable.objects.get(share_code=share_code)
+  except PageTable.DoesNotExist:
+    return not_found(request)
   return detail(request, page.user.username, page.slug, share=True)
 
 def detail(request, username, slug, share=False):
-  user = User.objects.get(username=username)
   try:
+    user = User.objects.get(username=username)
     page = PageTable.objects.get(user=user, slug=slug)
+  except User.objects.model.DoesNotExist:
+    return not_found(request)
   except PageTable.DoesNotExist:
-    return redirect("Wiki:create_with_slug",slug=slug)
+    if request.user.is_authenticated:
+      if user == request.user:
+        return redirect("Wiki:create_with_slug",slug=slug)
+      else:
+        return not_found(request)
+    else:
+      return not_found(request)
   if not share and not page.public and page.user != request.user:
-    return redirect("Wiki:index")
+    return not_found(request)
   if page.user == request.user or (request.user.is_authenticated and page.edit_permission):
     edit = True
   else:
@@ -90,6 +102,12 @@ def create(request, slug=None):
 def share_update(request, share_code):
   page = PageTable.objects.get(share_code=share_code)
   return update(request, page.user.username, page.slug, share=True)
+
+def not_found(request, message="ページが見つかりません"):
+  context = {
+    "message": message,
+  }
+  return render(request, 'Wiki/not_found.html', context)
 
 @login_required
 def update(request, username, slug, share=False):
