@@ -28,6 +28,7 @@ def main():
     print("---- SECRET_KEY ----")
     print(key)
     print("--------------------")
+    sys.exit()
   if os.path.isfile(options.sample):
     with open(options.sample, mode="r") as f:
       text = f.read()
