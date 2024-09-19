@@ -29,6 +29,8 @@ def main():
   django.setup()
   from django.conf import settings
   from Wiki.models import PageTable
+  if os.path.exists(options.output):
+    os.makedirs(options.output)
   for i, page in enumerate(PageTable.objects.all()):
     dic = {
       "username": page.user.username,
