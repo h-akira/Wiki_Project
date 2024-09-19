@@ -17,8 +17,8 @@ def parse_args():
   # parser.add_argument("-", "--", action="store_true", help="")
   # parser.add_argument("file", metavar="input-file", help="input file")
   options = parser.parse_args()
-  if not os.path.isfile(options.file): 
-    raise Exception("The input file does not exist.") 
+  # if not os.path.isfile(options.file): 
+  #   raise Exception("The input file does not exist.") 
   return options
 
 def main():
