@@ -34,7 +34,7 @@ def main():
   for i, page in enumerate(PageTable.objects.all()):
     dic = {
       "username": page.user.username,
-      "last_updated": page.last_updated,
+      "last_updated": page.last_updated.strftime("%Y-%m-%d %H:%M:%S"),
       "slug": page.slug,
       "priority": page.priority,
       "title": page.title,
