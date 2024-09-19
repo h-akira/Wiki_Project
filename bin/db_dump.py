@@ -46,7 +46,7 @@ def main():
       "text": page.text
     }
     with open(os.path.join(options.output, f"{i:04}.json"), "w") as f:
-      json.dump(dic, f, indent=2)
+      json.dump(dic, f, indent=2, ensure_ascii=False)
 
 if __name__ == '__main__':
   main()
