@@ -6,6 +6,7 @@
 import sys
 import os
 import json
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 def parse_args():
   import argparse
